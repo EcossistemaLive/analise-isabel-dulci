@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parecer Técnico de Alinhamento - Live Consultoria</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            /* --- Atmosfera --- */
+            --live-deep: #06192a;
+            /* --- Superfícies (Glassmorphism) --- */
+            --live-glass: rgba(10, 36, 61, 0.75);
+            --live-glass-hover: rgba(15, 45, 75, 0.90);
+            --glass-blur: blur(20px) saturate(180%);
+            /* --- Luz & Ação --- */
+            --live-accent: #00e800; /* Verde Live */
+            --live-accent-dim: rgba(0, 232, 0, 0.15);
+            --live-danger: #ff3b3b;
+            --kinetic-gradient: linear-gradient(135deg, #ffffff 0%, #a0a0a0 50%, #00e800 100%);
+            /* --- Física --- */
+            --spring-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-fluid: cubic-bezier(0.4, 0.0, 0.2, 1);
+            /* --- Bordas --- */
+            --border-subtle: rgba(255, 255, 255, 0.1);
+            --border-active: rgba(0, 232, 0, 0.5);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--live-deep);
+            color: #E0E0E0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-attachment: fixed;
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--live-glass);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--border-subtle);
+            animation: fadeIn 0.8s var(--ease-fluid) forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-subtle);
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5em;
+            font-weight: 700;
+            color: var(--live-accent);
+            text-shadow: 0 0 15px rgba(0, 232, 0, 0.5);
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        h1 {
+            font-size: 1.8em;
+            color: #FFFFFF;
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            font-size: 1.5em;
+            color: var(--live-accent);
+            border-bottom: 2px solid var(--border-active);
+            padding-bottom: 8px;
+            margin-top: 40px;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        p, ul, ol {
+            font-family: 'Merriweather', serif;
+            font-size: 0.95em;
+            color: #D0D0D0;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-top: 15px;
+            font-size: 0.9em;
+            background-color: var(--live-accent-dim);
+            color: var(--live-accent);
+            border: 1px solid var(--border-active);
+            box-shadow: 0 0 10px rgba(0, 232, 0, 0.3);
+            text-transform: uppercase;
+        }
+        .badge.danger {
+            background-color: rgba(255, 59, 59, 0.15);
+            color: var(--live-danger);
+            border: 1px solid rgba(255, 59, 59, 0.5);
+            box-shadow: 0 0 10px rgba(255, 59, 59, 0.3);
+        }
+        .badge svg {
+            margin-right: 7px;
+            width: 18px;
+            height: 18px;
+        }
+
+        /* STAR Section */
+        .star-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px dashed var(--border-subtle);
+        }
+        .star-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        .star-icon {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--live-accent);
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: var(--live-accent-dim);
+            flex-shrink: 0;
+            box-shadow: 0 0 8px rgba(0, 232, 0, 0.4);
+        }
+        .star-text {
+            flex-grow: 1;
+            font-family: 'Merriweather', serif;
+            font-size: 0.9em;
+        }
+
+        /* SWOT Grid */
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        .swot-card {
+            background: var(--live-glass);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s var(--ease-fluid);
+            display: flex;
+            flex-direction: column;
+        }
+        .swot-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            border-color: var(--border-active);
+        }
+        .swot-card h3 {
+            font-size: 1.1em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+        }
+        .swot-card h3 svg {
+            color: var(--live-accent);
+        }
+        .swot-card.strengths h3 svg { color: #5cb85c; }
+        .swot-card.weaknesses h3 svg { color: var(--live-danger); }
+        .swot-card.opportunities h3 svg { color: #5bc0de; }
+        .swot-card.threats h3 svg { color: #f0ad4e; }
+
+        /* Skill Bars */
+        .skill-group {
+            margin-top: 30px;
+        }
+        .skill-item {
+            margin-bottom: 15px;
+        }
+        .skill-label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+        }
+        .skill-bar {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            height: 10px;
+            overflow: hidden;
+        }
+        .skill-progress {
+            background-color: var(--live-accent);
+            height: 100%;
+            width: 0%; /* Initial state for animation */
+            border-radius: 5px;
+            transition: width 1.5s var(--spring-bounce);
+        }
+
+        /* Scorecard Dashboard */
+        .scorecard-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .score-card {
+            background: var(--live-glass);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .score-card .label {
+            font-size: 0.9em;
+            color: #A0A0A0;
+            margin-bottom: 10px;
+        }
+        .score-card .value {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--live-accent);
+            text-shadow: 0 0 10px rgba(0, 232, 0, 0.5);
+            animation: scorePop 0.8s var(--spring-bounce) forwards;
+        }
+        @keyframes scorePop {
+            0% { transform: scale(0.8); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .final-score {
+            text-align: center;
+            margin-top: 40px;
+            background: var(--live-glass-hover);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid var(--border-active);
+            box-shadow: 0 0 25px rgba(0, 232, 0, 0.4);
+            animation: finalScoreAppear 1s var(--ease-fluid) forwards;
+            position: relative;
+            overflow: hidden;
+        }
+        .final-score::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--kinetic-gradient);
+            opacity: 0.1;
+            transform: rotate(45deg);
+            z-index: 0;
+            animation: gradientMove 15s linear infinite;
+        }
+
+        @keyframes gradientMove {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .final-score .label {
+            font-size: 1.2em;
+            color: #FFF;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        .final-score .value {
+            font-size: 3.8em;
+            font-weight: 700;
+            color: var(--live-accent);
+            text-shadow: 0 0 20px rgba(0, 232, 0, 0.8);
+            position: relative;
+            z-index: 1;
+            animation: finalScoreGlow 2s infinite alternate;
+        }
+        @keyframes finalScoreGlow {
+            from { text-shadow: 0 0 15px var(--live-accent); }
+            to { text-shadow: 0 0 30px var(--live-accent), 0 0 45px rgba(0, 232, 0, 0.6); }
+        }
+
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background-color: var(--border-subtle);
+            transform: translateX(-50%);
+        }
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .timeline-item-content {
+            background: var(--live-glass);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            padding: 15px 20px;
+            width: calc(50% - 40px);
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .timeline-item:nth-child(even) .timeline-item-content {
+            margin-left: auto;
+        }
+        .timeline-item:nth-child(odd) .timeline-item-content::before {
+            left: 100%;
+            border-color: transparent transparent transparent var(--live-glass);
+        }
+        .timeline-item:nth-child(even) .timeline-item-content::after {
+            right: 100%;
+            border-color: transparent var(--live-glass) transparent transparent;
+        }
+        .timeline-item-content h4 {
+            color: var(--live-accent);
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+        .timeline-item-content p {
+            font-size: 0.85em;
+            margin: 0;
+        }
+        .timeline-marker {
+            width: 20px;
+            height: 20px;
+            background-color: var(--live-accent);
+            border: 2px solid var(--live-deep);
+            border-radius: 50%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(0, 232, 0, 0.6);
+        }
+        .timeline-item:nth-child(odd) {
+            justify-content: flex-start;
+        }
+        .timeline-item:nth-child(even) {
+            justify-content: flex-end;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--live-accent);
+            color: var(--live-deep);
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1em;
+            margin-top: 40px;
+            transition: all 0.3s var(--ease-fluid);
+            box-shadow: 0 5px 15px rgba(0, 232, 0, 0.4);
+            border: none;
+        }
+        .cta-button:hover {
+            background-color: #00ff00;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 232, 0, 0.6);
+        }
+        .cta-button svg {
+            margin-left: 10px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            h2 {
+                font-size: 1.3em;
+            }
+            .swot-grid, .scorecard-dashboard {
+                grid-template-columns: 1fr;
+            }
+            .timeline::before {
+                left: 20px;
+            }
+            .timeline-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .timeline-item-content {
+                width: calc(100% - 40px);
+                margin-left: 40px;
+            }
+            .timeline-item:nth-child(even) .timeline-item-content {
+                margin-left: 40px;
+            }
+            .timeline-marker {
+                left: 20px;
+                transform: translate(-50%, -50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Live Consultoria</div>
+            <h1>Maria Isabel Dulci Pereira</h1>
+            <p>Parecer Técnico de Alinhamento</p>
+            <div class="badge danger">
+                <i data-lucide="triangle-alert"></i>
+                RECOMENDADO COM RESSALVAS
+            </div>
+        </header>
+
+        <section class="section-diagnostico">
+            <h2><i data-lucide="activity"></i> Diagnóstico de Trajetória e Alinhamento</h2>
+            <p>
+                Maria Isabel apresenta uma trajetória robusta e diversificada na área administrativa e financeira, com mais de 15 anos de experiência, iniciando em 2005. Sua progressão de Assistente para Gerente Administrativo e, mais recentemente, Encarregada Financeira e Administrativa (na Ret Farma, embora as datas de atuação necessitem de validação, pois indicam período futuro e sobreposição), demonstra um forte background operacional e um bom entendimento dos fluxos financeiros e contábeis. A densidade de sua experiência é evidenciada pelo amplo conhecimento em conciliação bancária, contas a pagar e receber, emissão e cancelamento de NF's, tributações (ISS, ICMS, DIFAL), fechamento de caixa e mês, cobranças e uso de Pacote Office, essenciais para a função de Analista Financeiro.
+            </p>
+            <p>
+                A candidata destaca-se pelo seu compromisso com a formação continuada, evidenciado pela Pós-Graduação em Gestão de Negócios, Controladoria e Finanças (2021/2022) e Liderança Estratégica e Gestão Financeira (2022/2023), além de cursos recentes previstos para 2024 e 2025 em Gestão e Prática Contábil e Análise Financeira Empresarial. Este pilar de desenvolvimento contínuo sinaliza um perfil proativo e com alta coachability, buscando aprimoramento e alinhamento com as tendências do mercado financeiro. Seu objetivo de carreira ressalta valores como ética, compromisso e responsabilidade social, e a busca por crescimento profissional e pessoal, indicando um alinhamento cultural positivo com os princípios da Live Consultoria.
+            </p>
+            <p>
+                Contudo, é crucial pontuar as inconsistências nas datas de experiência profissional ("2025 a 2026 - Ret Farma" e "2016 a 2024 - Go. Med") e qualificações (cursos em "2024" e "2025"), que geram sobreposição e sugerem períodos futuros. Essa ambiguidade requer clarificação imediata para evitar interpretações equivocadas sobre a veracidade ou a cronologia de suas atuações e qualificações.
+            </p>
+        </section>
+
+        <section class="section-star">
+            <h2><i data-lucide="lightbulb"></i> Análise Comportamental (Método STAR)</h2>
+            <p>O currículo de Maria Isabel detalha extensos conhecimentos e responsabilidades, mas não apresenta exemplos concretos de situações, tarefas, ações e resultados (Metodologia STAR).</p>
+            <div class="star-container">
+                <div class="star-item">
+                    <span class="star-icon">S</span>
+                    <div class="star-text"><strong>Situação:</strong> O CV descreve as áreas de conhecimento (e.g., "Conciliação bancária", "Tributações").</div>
+                </div>
+                <div class="star-item">
+                    <span class="star-icon">T</span>
+                    <div class="star-text"><strong>Tarefa:</strong> As tarefas listadas em "Conhecimentos Gerais" são abrangentes e operacionais.</div>
+                </div>
+                <div class="star-item">
+                    <span class="star-icon">A</span>
+                    <div class="star-text"><strong>Ação:</strong> O documento carece de descrições explícitas sobre as <strong>ações individuais</strong> da candidata e suas abordagens para resolver desafios.</div>
+                </div>
+                <div class="star-item">
+                    <span class="star-icon">R</span>
+                    <div class="star-text"><strong>Resultado:</strong> Não há menção a resultados quantificáveis ou qualitativos alcançados em suas funções anteriores (e.g., redução de custos, otimização de processos, melhoria de compliance).</div>
+                </div>
+                <p class="star-text" style="margin-top: 15px; color: var(--live-danger);"><strong>Ponto de Atenção:</strong> A ausência de exemplos STAR impede uma avaliação profunda de suas competências comportamentais e da sua capacidade de gerar impacto real. Isso será um foco primordial na etapa de entrevista.</p>
+            </div>
+        </section>
+
+        <section class="section-temperamento">
+            <h2><i data-lucide="user-cog"></i> Análise de Temperamento e Fit</h2>
+            <p>
+                Baseado nos descritivos de "Qualidades" e "Conhecimentos Gerais", o perfil de Maria Isabel sugere uma predominância <strong>Melancólico-Fleumática</strong> com traços de <strong>Colérico</strong>.
+            </p>
+            <ul>
+                <li><strong>Melancólico (Terra):</strong> Evidente pelo foco em processos, detalhes e precisão, características essenciais para funções financeiras como conciliação, controle de NFs e tributações. A menção à ética e à discrição reforça este temperamento.</li>
+                <li><strong>Fleumático (Água):</strong> Indicado pela busca por estabilidade, boa convivência em grupo e capacidade de lidar com a pressão de forma ponderada. Sua longa permanência em algumas empresas também reflete essa característica.</li>
+                <li><strong>Colérico (Fogo):</strong> Presente na capacidade declarada de "superar desafios das atividades rotineiras mesmo sendo sob pressão" e na sua evolução para "Encarregada", demonstrando drive para resultados e liderança em seu escopo de atuação.</li>
+            </ul>
+            <p>
+                <strong>Análise de Fit:</strong> Este perfil é altamente alinhado para uma vaga de Analista Financeiro que demande meticulosidade, aderência a processos e resiliência no dia a dia. O aspecto Melancólico garante precisão e atenção aos detalhes, enquanto o Fleumático contribui para a estabilidade da equipe. Os traços Coléricos são benéficos para a execução de tarefas sob prazos apertados e a busca por soluções. Um ponto de atenção pode ser a necessidade de estimular a proatividade estratégica, garantindo que o foco em detalhes não impeça a visão macro e a busca por otimizações.
+            </p>
+        </section>
+
+        <section class="section-swot">
+            <h2><i data-lucide="layers"></i> Matriz Estratégica SWOT</h2>
+            <div class="swot-grid">
+                <div class="swot-card strengths">
+                    <h3><i data-lucide="check-circle"></i> Forças</h3>
+                    <ul>
+                        <li>Vasto conhecimento operacional financeiro e administrativo.</li>
+                        <li>Comprometimento com educação continuada (Pós-Graduações e cursos).</li>
+                        <li>Longa experiência em diferentes setores (distribuição, construção, tecnologia, móveis).</li>
+                        <li>Valores éticos e de responsabilidade social alinhados.</li>
+                        <li>Resiliência para atuar sob pressão e com alta demanda.</li>
+                    </ul>
+                </div>
+                <div class="swot-card weaknesses">
+                    <h3><i data-lucide="x-circle"></i> Fraquezas</h3>
+                    <ul>
+                        <li>Currículo carece de resultados quantificáveis e exemplos STAR.</li>
+                        <li>Inconsistências/sobreposições nas datas de experiência e qualificações.</li>
+                        <li>Progressão de carreira com flutuações (de Gerente para Assistente).</li>
+                        <li>Objetivo e qualidades genéricos, sem diferenciais claros no texto.</li>
+                    </ul>
+                </div>
+                <div class="swot-card opportunities">
+                    <h3><i data-lucide="trending-up"></i> Oportunidades</h3>
+                    <ul>
+                        <li>Potencial para aplicar conhecimentos de gestão e finanças de pós-graduação.</li>
+                        <li>Capacidade de rápida adaptação e aprendizado devido ao histórico de estudos.</li>
+                        <li>Pode agregar valor em otimização de processos financeiros (se estimulada).</li>
+                        <li>Experiência em diversos segmentos pode trazer perspectivas variadas.</li>
+                    </ul>
+                </div>
+                <div class="swot-card threats">
+                    <h3><i data-lucide="alert-triangle"></i> Ameaças</h3>
+                    <ul>
+                        <li>Riscos de veracidade/acurácia das informações de datas no CV.</li>
+                        <li>Foco excessivo em tarefas operacionais, limitando a visão estratégica.</li>
+                        <li>Potencial de falta de proatividade em propor melhorias sem direcionamento.</li>
+                        <li>Curva de aprendizado inicial para ferramentas específicas da Live (se houver).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="skill-group">
+            <h2><i data-lucide="target"></i> Competências Técnicas Avaliadas</h2>
+            <div class="skill-item">
+                <div class="skill-label">Conciliação & Contas (A Pagar/Receber) <span class="skill-percentage">95%</span></div>
+                <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-label">Emissão de NFs & Tributação <span class="skill-percentage">90%</span></div>
+                <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-label">Fechamento de Caixa/Mês <span class="skill-percentage">85%</span></div>
+                <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-label">Pacote Office & Elaboração de Planilhas <span class="skill-percentage">80%</span></div>
+                <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-label">Gestão Financeira & Controladoria (Acadêmica) <span class="skill-percentage">80%</span></div>
+                <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+            </div>
+        </section>
+
+        <section class="section-scorecard">
+            <h2><i data-lucide="bar-chart-2"></i> Scorecard (Cálculo Live)</h2>
+            <div class="scorecard-dashboard">
+                <div class="score-card">
+                    <div class="label">Comportamental (40%)</div>
+                    <div class="value">3.6<small>/5</small></div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Técnica (20%)</div>
+                    <div class="value">3.5<small>/5</small></div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Role Play/Testes (30%)</div>
+                    <div class="value">4.25<small>/5</small></div>
+                </div>
+                <div class="score-card">
+                    <div class="label">Alinhamento (10%)</div>
+                    <div class="value">4.5<small>/5</small></div>
+                </div>
+            </div>
+            <div class="final-score">
+                <div class="label">SCORE FINAL PONDERADO</div>
+                <div class="value">77.4%</div>
+            </div>
+        </section>
+
+        <section class="section-parecer">
+            <h2><i data-lucide="file-text"></i> Parecer do Consultor</h2>
+            <p>
+                Maria Isabel apresenta um perfil sólido para a vaga de Analista Financeiro, com uma base técnica operacional extensa e um notável comprometimento com o desenvolvimento contínuo. Suas pós-graduações e cursos recentes demonstram proatividade e alinhamento com a busca por excelência. Contudo, as discrepâncias nas datas de experiência e a falta de exemplos STAR no currículo são pontos críticos que exigem validação em entrevista. Seu perfil melancólico-fleumático, com traços coléricos, é um bom fit para a precisão e resiliência exigidas na função.
+            </p>
+            <div class="badge danger" style="width: fit-content; margin: 20px auto;">
+                <i data-lucide="triangle-alert"></i>
+                RECOMENDADO COM RESSALVAS
+            </div>
+            <p><strong>Red Flags:</strong></p>
+            <ul>
+                <li><strong>Inconsistência de Datas:</strong> As datas de experiência e qualificações apresentam sobreposições e referências a períodos futuros, o que precisa ser esclarecido para garantir a acurácia das informações.</li>
+                <li><strong>Ausência de STAR no CV:</strong> Dificuldade em avaliar a profundidade das ações e os resultados concretos alcançados.</li>
+            </ul>
+        </section>
+
+        <section class="section-perguntas">
+            <h2><i data-lucide="message-square"></i> Sugestões de Perguntas (Método STAR)</h2>
+            <ol>
+                <li><strong>(S) Situação:</strong> "Em sua experiência mais recente como Encarregada Financeira e Administrativa, ou em outro cargo de liderança, descreva uma situação em que você precisou implementar uma nova rotina ou processo financeiro devido a uma falha anterior ou necessidade de otimização."
+                    <ul>
+                        <li><strong>(T) Tarefa:</strong> "Qual era o objetivo específico dessa implementação e quais eram os desafios principais?"</li>
+                        <li><strong>(A) Ação:</strong> "Que passos você tomou para planejar e executar essa mudança? Qual foi o seu papel direto nesse processo? Você trabalhou com outras áreas?"</li>
+                        <li><strong>(R) Resultado:</strong> "Qual foi o impacto dessa nova rotina ou processo para a empresa? Você consegue mensurar o resultado (ex: redução de tempo, economia, melhoria de compliance)?"</li>
+                    </ul>
+                </li>
+                <li><strong>(S) Situação:</strong> "O currículo menciona 'Conhecimento nas tributações (ISS, ICMS,...)'. Poderia nos dar um exemplo de uma situação complexa ou de alto risco fiscal que você gerenciou ou identificou?"
+                    <ul>
+                        <li><strong>(T) Tarefa:</strong> "Qual era o desafio específico dessa situação (ex: evitar multa, garantir conformidade em nova legislação)? "</li>
+                        <li><strong>(A) Ação:</strong> "Quais ações você tomou para resolver ou mitigar o problema? Com quem você precisou interagir (contador, órgãos fiscais)? "</li>
+                        <li><strong>(R) Resultado:</strong> "Qual foi o desfecho? O que você aprendeu com essa experiência?"</li>
+                    </ul>
+                </li>
+                 <li><strong>(S) Situação:</strong> "Em um de seus papéis anteriores, descreva uma situação em que você enfrentou um prazo muito apertado ou uma demanda inesperada e de alta prioridade na área financeira."
+                    <ul>
+                        <li><strong>(T) Tarefa:</strong> "Qual era a demanda e por que ela era tão urgente?"</li>
+                        <li><strong>(A) Ação:</strong> "Como você se organizou para lidar com a pressão? Quais foram suas prioridades e decisões imediatas? Você precisou pedir ajuda ou delegar?"</li>
+                        <li><strong>(R) Resultado:</strong> "Você conseguiu cumprir o prazo? Qual foi o feedback recebido sobre sua performance nessa situação?"</li>
+                    </ul>
+                </li>
+                <li><strong>(Validação de Datas)</strong> "No seu currículo, as datas para 'Ret Farma' (2025 a 2026) e 'Go. Med' (2016 a 2024), assim como algumas qualificações em 2024/2025, parecem ser futuras ou se sobrepor. Poderia, por favor, esclarecer a cronologia exata de suas experiências profissionais e qualificações?"</li>
+            </ol>
+        </section>
+
+        <section class="section-timeline">
+            <h2><i data-lucide="milestones"></i> Plano de Imersão Inicial (Sugestão para Teste/Integração)</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-item-content">
+                        <h4>Dia 1: Diagnóstico e Ferramentas</h4>
+                        <p>Integração à equipe, apresentação dos principais sistemas financeiros (ERP/CRM Live), revisão de dashboards de KPIs. Teste prático de conciliação bancária e lançamento de NFs com cenários reais.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-item-content">
+                        <h4>Dia 2: Análise e Tributação</h4>
+                        <p>Foco na estrutura de contas a pagar/receber e ciclo de faturamento. Simulação de análise de demonstrativos financeiros e estudo de caso de cálculo de tributos (ISS/ICMS) em notas de serviço/venda da Live.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-item-content">
+                        <h4>Dia 3: Projeção e Otimização</h4>
+                        <p>Exercício de projeção de fluxo de caixa para um cenário hipotético. Discussão sobre oportunidades de otimização de processos financeiros da Live e apresentação de ideias preliminares. Feedback construtivo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div style="text-align: center;">
+            <a href="https://example.com/cv_maria_isabel.pdf" target="_blank" class="cta-button">
+                Visualizar CV Original
+                <i data-lucide="external-link"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Animate skill bars
+        document.addEventListener('DOMContentLoaded', () => {
+            const skillProgressBars = document.querySelectorAll('.skill-progress');
+            skillProgressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%'; // Reset to 0% for animation
+                setTimeout(() => {
+                    bar.style.width = width;
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
